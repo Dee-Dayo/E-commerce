@@ -1,7 +1,9 @@
+import Container from "@/components/Container";
+
 export default function Home() {
   return (
-      <div>
+      <Container>
           <p>Dee E-commerce Website</p>
-      </div>
+      </Container>
   );
 }
