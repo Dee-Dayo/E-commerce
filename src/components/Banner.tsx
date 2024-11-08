@@ -2,8 +2,8 @@ import { getBannersData } from "@/lib/getData";
 import Container from "@/components/Container";
 import { urlFor } from "@/sanity/lib/image";
 import Image from 'next/image';
-import Link from "next/link";
 import Button from "@/components/Button";
+import { BannerData } from "../../type";
 
 const Banner = async () => {
     const banners = await getBannersData();
@@ -33,7 +33,24 @@ const Banner = async () => {
                 />
             </div>
             {/* Right half - double image */}
-            <div></div>
+            <div className='flex flex-col space-y-5 md:space-y-10 h-auto md:max-h-[600px]'>
+                {banners.slice(1, 3).map((item: BannerData) => (
+                    <div key={item?._id} className='h-full md:h-1/2 bg-bgLight rounded-lg overflow-hidden flex justify-center p-5 group'>
+                        <div>
+                            <div>
+                                <p>{item?.title}</p>
+                            </div>
+                        </div>
+                        <Image
+                            src={urlFor(item?.image).url()}
+                            alt={item?.title}
+                            width={500}
+                            height={500}
+                            className='object-contain h-72 md:h-60 w-1/2 group-hover:scale-105 hoverEffect'
+                        />
+                    </div>
+                ))}
+            </div>
         </Container>
     );
 };
