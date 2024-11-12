@@ -9,7 +9,7 @@ const FormattedPrice = ({ amount, className }: Props) => {
     const priceFormat = new Intl.NumberFormat("en-NG", {
         style: "currency",
         currency: "NGN",
-        minimumFractionDigits: 2,
+        minimumFractionDigits: 0,
         currencyDisplay: "symbol",
     }).format(amount);
 
