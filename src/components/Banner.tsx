@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Button from "@/components/Button";
 import { BannerData } from "../../type";
 import Link from "next/link";
+import FormattedPrice from "@/components/FormattedPrice";
 
 const Banner = async () => {
     const banners = await getBannersData();
@@ -16,8 +17,10 @@ const Banner = async () => {
             <div className='md:col-span-2 bg-bgLight relative flex items-end justify-end rounded-lg overflow-hidden group'>
                 <div className='h-full z-10 absolute left-10 top-0 flex flex-col justify-center isolate gap-5 md:gap-5'>
                     <div className='flex flex-col gap-1 md:gap-3'>
-                        <button className='bg-lightGreen text-white rounded-full w-20 py-1 text-sm font-semibold hover:bg-green-600 hoverEffect'>
-                            Sale {singleBanner?.price}
+                        <button className='bg-lightGreen text-white rounded-full w-40 py-1 text-sm font-semibold hover:bg-green-600 hoverEffect'>
+                            Sale <FormattedPrice
+                                    amount={singleBanner?.price}
+                                />
                         </button>
                     </div>
                     <p className='text-xl md:text-3xl font-semibold'>{singleBanner?.title}</p>
@@ -42,7 +45,13 @@ const Banner = async () => {
                                 <p className='text-2xl font-semibold'>{item?.title}</p>
                                 <p className='text-3xl font-bold'>{item?.subtitle}</p>
                             </div>
-                            <p className='mt-3 font-medium text-black/60'>From {item?.price}</p>
+                            <p className='mt-3 font-medium text-black/60'>
+                                From {" "}
+                                <FormattedPrice
+                                    amount={item?.price}
+                                    className='text-lightRed font-bold'
+                                />
+                            </p>
                             <Link href={'/shop'} className='mt-5 font-bold underline underline-offset-2 decoration-[1px] hover:text-lightRed hoverEffect'>Shop now!</Link>
                         </div>
                         <Image

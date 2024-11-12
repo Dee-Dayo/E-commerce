@@ -1,14 +1,21 @@
-import {twMerge} from "tailwind-merge";
+import { twMerge } from "tailwind-merge";
 
-interface Props{
+interface Props {
     amount: number;
-    classname?:string;
+    className?: string;
 }
 
-const FormattedPrice = ({amount, className}: Props) => {
+const FormattedPrice = ({ amount, className }: Props) => {
+    const priceFormat = new Intl.NumberFormat("en-NG", {
+        style: "currency",
+        currency: "NGN",
+        minimumFractionDigits: 2,
+        currencyDisplay: "symbol",
+    }).format(amount);
+
     return (
-        <span className={twMerge('text-base font-semibold', className)}>0</span>
-    )
+        <span className={twMerge('text-base font-semibold', className)}>{priceFormat}</span>
+    );
 }
 
 export default FormattedPrice;
