@@ -47,7 +47,7 @@ export interface ProductData {
     _updatedAt: string;
     ratings: number;
     brand: string;
-    _tye: 'product';
+    _type: 'product';
     _id: string;
     position: string;
     rowprice: number;
