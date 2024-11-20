@@ -4,18 +4,15 @@ import {bannerQuery, bestSellersQuery, productsQuery} from "@/lib/query";
 export const revalidate = 0;
 
 const getBannersData = async () => {
-    const bannersData = await client.fetch(bannerQuery)
-    return bannersData;
+    return await client.fetch(bannerQuery);
 };
 
 const getProductsData = async () => {
-    const productsData = await client.fetch(productsQuery)
-    return productsData;
+    return await client.fetch(productsQuery);
 };
 
 const getBestSellersData = async () => {
-    const bestSellersData = await client.fetch(bestSellersQuery)
-    return bestSellersData;
+    return await client.fetch(bestSellersQuery);
 };
 
 export {getBannersData, getProductsData, getBestSellersData};
