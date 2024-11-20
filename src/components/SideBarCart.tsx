@@ -1,8 +1,13 @@
-import {MdSwitchAccount} from "react-icons/md";
+'use client';
+
 import Link from "next/link";
 import {RiShoppingCart2Fill} from "react-icons/ri";
+import {useSelector} from "react-redux";
+import {StoreState} from "../../type";
 
 const SideBarCart = () => {
+    const {cart} = useSelector((state:StoreState) => state?.jumia);
+
     return (
         <Link
                 href={'/cart'}
@@ -17,7 +22,9 @@ const SideBarCart = () => {
                 </div>
                 <p className='text-xs font-semibold'>Buy Now</p>
                 <p className='absolute top-1 right-2 bg-darkOrange text-white text-sm
-                w-4 h-4 rounded-full flex items-center justify-center font-semibold'>0</p>
+                w-4 h-4 rounded-full flex items-center justify-center font-semibold'>
+                    {cart ? cart?.length : 0}
+                </p>
             </Link>
     )
 }

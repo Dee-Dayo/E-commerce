@@ -52,3 +52,17 @@ export interface ProductData {
     position: string;
     rowprice: number;
 }
+
+interface UserInfo{
+    id: string;
+    name: string;
+    email: string;
+}
+
+export interface StoreState{
+    jumia: {
+        cart: ProductData[];
+        wishList: ProductData[];
+        userInfo: UserInfo | null;
+    }
+}
