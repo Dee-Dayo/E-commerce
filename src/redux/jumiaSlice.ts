@@ -55,7 +55,7 @@ export const jumiaSlice = createSlice({
         removeFromCart:(state, action)=> {
             state.cart = state.cart.filter((item)=>item._id !== action.payload);
         },
-        resetCard:(state)=> {
+        resetCart:(state)=> {
             state.cart = [];
         },
         addToWishList: (state, action) => {
@@ -76,5 +76,5 @@ export const jumiaSlice = createSlice({
     },
 });
 
-export const {addToCart, increaseQuantity, decreaseQuantity, resetCard, removeFromCart, removeUser, addToWishList, resetWishList, addUser} = jumiaSlice.actions;
+export const {addToCart, increaseQuantity, decreaseQuantity, resetCart, removeFromCart, removeUser, addToWishList, resetWishList, addUser} = jumiaSlice.actions;
 export default jumiaSlice.reducer;
