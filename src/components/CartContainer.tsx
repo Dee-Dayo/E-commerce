@@ -57,7 +57,7 @@ const CartContainer = () => {
                                 </p>
                             </div>
                         </div>
-                            <Button disabled={false} className='py-3 px-8 rounded-md disabled:bg-darkOrange/40'>
+                            <Button disabled={true} className='py-3 px-8 rounded-md disabled:bg-darkOrange/40'>
                                 Proceed to Checkout
                             </Button>
                         </div>
