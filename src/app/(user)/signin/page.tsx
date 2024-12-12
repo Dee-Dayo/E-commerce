@@ -2,9 +2,15 @@ import Container from "@/components/Container";
 import googleImage from "@/app/assets/pngwing.com (4).png"
 import React from "react";
 import Image from "next/image";
-import {signIn} from "@/auth";
+import {auth, signIn} from "@/auth";
+import {redirect} from "next/navigation";
 
-const SignInPage = () => {
+const SignInPage = async() => {
+    const session = await auth ()
+
+    if (session?.user){
+        redirect('/')
+    }
     return (
         <Container className='py-20 flex flex-col justify-center items-center'>
             <form

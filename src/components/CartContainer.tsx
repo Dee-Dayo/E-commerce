@@ -10,7 +10,7 @@ import Link from "next/link";
 import FormattedPrice from "@/components/FormattedPrice";
 import Button from "@/components/Button";
 
-const CartContainer = () => {
+const CartContainer = ({session}: any) => {
     const {cart} = useSelector((state:StoreState) => state?.jumia);
     const dispatch = useDispatch();
 
@@ -57,9 +57,11 @@ const CartContainer = () => {
                                 </p>
                             </div>
                         </div>
-                            <Button disabled={true} className='py-3 px-8 rounded-md disabled:bg-darkOrange/40'>
+                            <Button disabled={!session?.user} className='py-3 px-8 rounded-md disabled:bg-darkOrange/40'>
                                 Proceed to Checkout
                             </Button>
+                            {!session?.user && <p className="text-center text-sm font-medium text-lightRed -mt-3">
+                                Please sign in to make Checkout </p>}
                         </div>
                     </div>
                 </div>
