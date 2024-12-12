@@ -22,6 +22,21 @@ const CartContainer = ({session}: any) => {
         }
     };
 
+    const handleCheckout = async () => {
+        const response = await fetch('/api/checkout', {
+            method: "POST",
+            headers:{
+                "Content-Type": "application/json",
+            },
+            body:JSON.stringify({
+                items: cart,
+                email: session?.user?.email,
+            }),
+        });
+        const result = await response.json()
+        console.log(result)
+    };
+
     return (
         <div>
             {cart?.length > 0 ? (
@@ -50,14 +65,16 @@ const CartContainer = ({session}: any) => {
                                     Subtotal <FormattedPrice amount={250}/>
                                 </p>
                                 <p className='flex items-center justify-between border-[1px] border-gray-400 border-b-0 py-1.5 px-4 text-lg font-medium'>
-                                    Shipping Charge <FormattedPrice amount={250}/>
+                                    Shipping Charge <FormattedPrice amount={0}/>
                                 </p>
                                 <p className='flex items-center justify-between border-[1px] border-gray-400 py-1.5 px-4 text-lg font-medium'>
                                     Total <FormattedPrice amount={250}/>
                                 </p>
                             </div>
                         </div>
-                            <Button disabled={!session?.user} className='py-3 px-8 rounded-md disabled:bg-darkOrange/40'>
+                            <Button
+                                onClick={handleCheckout}
+                                disabled={!session?.user} className='py-3 px-8 rounded-md disabled:bg-darkOrange/40'>
                                 Proceed to Checkout
                             </Button>
                             {!session?.user && <p className="text-center text-sm font-medium text-lightRed -mt-3">
