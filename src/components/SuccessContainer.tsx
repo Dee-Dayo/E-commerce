@@ -7,6 +7,7 @@ import {useEffect, useState} from "react";
 import {resetCart} from "@/redux/jumiaSlice";
 import {HiCheckCircle, HiHome, HiInformationCircle, HiMail} from "react-icons/hi";
 import Link from "next/link";
+import toast from "react-hot-toast";
 
 const SuccessContainer = ({id}: {id : string}) => {
     const {cart} = useSelector((state: StoreState) => state?.jumia);
@@ -42,6 +43,7 @@ const SuccessContainer = ({id}: {id : string}) => {
             if (data?.success){
                 setLoading(false);
                 dispatch(resetCart());
+                toast.success(data?.message);
             }
         } catch (error){
             console.log("Error: ", error);

@@ -9,10 +9,12 @@ import {motion} from 'framer-motion'
 import Link from "next/link";
 import FormattedPrice from "@/components/FormattedPrice";
 import Button from "@/components/Button";
+import {useEffect, useState} from "react";
 
 const CartContainer = ({session}: any) => {
     const {cart} = useSelector((state:StoreState) => state?.jumia);
     const dispatch = useDispatch();
+    const [totalAmt, setTotalAmt] = useState(0);
 
     const handleResetCart = () => {
         const confirmed = window.confirm('Are you sure to reset your Cart?')
@@ -21,6 +23,15 @@ const CartContainer = ({session}: any) => {
             toast.success('Cart reset successfully')
         }
     };
+
+    useEffect(() => {
+        let price = 0;
+        cart.map((item) =>{
+            price += item?.price * item?.quantity;
+            return price;
+        })
+        setTotalAmt(price);
+    }, [cart]);
 
     const handleCheckout = async () => {
         const response = await fetch('/api/checkout', {
@@ -64,13 +75,13 @@ const CartContainer = ({session}: any) => {
                                 Cart Total</h1>
                             <div>
                                 <p className='flex items-center justify-between border-[1px] border-gray-400 border-b-0 py-1.5 px-4 text-lg font-medium'>
-                                    Subtotal <FormattedPrice amount={250}/>
+                                    Subtotal <FormattedPrice amount={totalAmt}/>
                                 </p>
                                 <p className='flex items-center justify-between border-[1px] border-gray-400 border-b-0 py-1.5 px-4 text-lg font-medium'>
                                     Shipping Charge <FormattedPrice amount={0}/>
                                 </p>
                                 <p className='flex items-center justify-between border-[1px] border-gray-400 py-1.5 px-4 text-lg font-medium'>
-                                    Total <FormattedPrice amount={250}/>
+                                    Total <FormattedPrice amount={totalAmt}/>
                                 </p>
                             </div>
                         </div>
